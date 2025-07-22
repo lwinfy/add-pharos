@@ -1,0 +1,38 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html>
+<head>
+  <title>Add Pharos Testnet to MetaMask</title>
+</head>
+<body style="font-family: sans-serif; text-align: center; margin-top: 100px;">
+  <h2>Add Pharos Testnet to MetaMask</h2>
+  <button onclick="addPharos()" style="padding: 10px 20px; font-size: 16px;">Add to MetaMask</button>
+
+  <script>
+    async function addPharos() {
+      if (typeof window.ethereum !== 'undefined') {
+        try {
+          await window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [{
+              chainId: '0x1f92', // 8082 in hex
+              chainName: 'Pharos Testnet',
+              nativeCurrency: {
+                name: 'PHRS',
+                symbol: 'PHRS',
+                decimals: 18
+              },
+              rpcUrls: ['https://rpc.testnet.pharos.shardeum.org'],
+              blockExplorerUrls: ['https://explorer.testnet.pharos.shardeum.org']
+            }]
+          });
+          alert('Pharos Testnet has been added!');
+        } catch (error) {
+          alert('Error adding network: ' + error.message);
+        }
+      } else {
+        alert('MetaMask not detected');
+      }
+    }
+  </script>
+</body>
+</html>
